@@ -43,9 +43,12 @@
       <v-card-actions>
         <v-row>
           <v-col cols="2">
-            <v-btn rounded color="primary" absolute left>
+            <v-btn rounded color="primary" absolute left @click="copy()">
               Share to my friends
             </v-btn>
+            <v-tooltip v-model="show" right>
+              <span>{{pokemonData.name}} was successfully copied</span>
+            </v-tooltip>
           </v-col>
           <v-col cols="2">
             <v-btn
@@ -72,7 +75,7 @@
 
 <script>
 export default {
-   props: {
+  props: {
     dialog: {
       type: Boolean,
       default: null,
@@ -93,11 +96,28 @@ export default {
   data() {
     return {
       myDialog: null,
+      show: false,
     }
   },
- 
   created() {
     this.myDialog = this.dialog
+  },
+  methods: {
+    copy() {
+      this.show = true
+      let types = ''
+      this.pokemonData.types.map((item) => {
+        types += `${item.type.name}. `
+        return item
+      })
+      const copy = `  Name: ${this.pokemonData.name},
+                          Weight: ${this.pokemonData.weight},
+                          Height: ${this.pokemonData.height},
+                          Types: ${types}`
+      navigator.clipboard.writeText(copy)
+
+      setTimeout(() => (this.show = false), 3000)
+    },
   },
 }
 </script>

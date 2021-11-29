@@ -1,6 +1,6 @@
 # Global Pokédex
 
-## Descriotion
+## Description
 
 This project is a Pokédex, reacted with the VueJs framework. It has the use of Vuex global state, and vuetifyjs for the design part. In addition to axios for cosultas Http. All generated with the NuxtJs Framework in version 2.
 

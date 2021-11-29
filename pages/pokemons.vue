@@ -38,6 +38,7 @@
 <script>
 import { mapState } from 'vuex'
 export default {
+  
   computed: {
     ...mapState([
       'pokemonsData',
@@ -70,7 +71,13 @@ export default {
       return pokemonsData
     },
   },
+  mounted: function () {
+    this.getData()
+  },
   methods: {
+    getData() {
+      this.$store.dispatch("getAllPokemons")
+    },
     getNextData() {
       this.$store.dispatch('getNextPokemons', this.nextFecth)
     },
@@ -88,7 +95,7 @@ export default {
     },
     closeDialog() {
       this.$store.dispatch('closeDialog')
-    },
+    }
   },
 }
 </script>
